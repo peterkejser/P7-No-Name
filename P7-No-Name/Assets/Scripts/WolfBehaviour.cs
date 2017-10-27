@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class WolfBehaviour : MonoBehaviour {
 
-    float startTime;
     public Animation eatingAnimation;
     public bool fruitsAreSpawning;
+    public int speed;
+    GameObject scriptHolder;
 
     void Start()
     {
-        startTime = Time.time;
+        speed = 5;
+        scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
     }
 
     void Update()
@@ -53,18 +55,39 @@ public class WolfBehaviour : MonoBehaviour {
         target.GetComponent<FruitBehaviour>().edible = true;
         var currentPos = transform.position;
         var targetPos = new Vector3(target.position.x, 3, target.position.z);
-        //float time = 10;
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
         while (transform.position != targetPos && target != null)
         {
             float fracJourney = elapsedTime / journeyLength;
-            transform.position = Vector3.Lerp(currentPos, targetPos, fracJourney * 4);
+            transform.position = Vector3.Lerp(currentPos, targetPos, fracJourney * speed);
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         eatingAnimation.Play("New Animation");
         yield return new WaitForSeconds(2f);
-        FindNearestFruit();
+
+        if (scriptHolder.GetComponent<PointSystem>().totalPoints[0] < 100)
+        {
+            FindNearestFruit();
+        }
+        else
+        {
+            StartCoroutine("MoveToHole");
+        }
+    }
+    IEnumerator MoveToHole()
+    {
+        var currentPos = transform.position;
+        Vector3 targetPos = new Vector3(-3.66f, 1.02f, -24.5f);
+        float elapsedTime = 0;
+        float journeyLength = Vector3.Distance(currentPos, targetPos);
+        while (transform.position != targetPos)
+        {
+            float fracJourney = elapsedTime / journeyLength;
+            transform.position = Vector3.Lerp(currentPos, targetPos, fracJourney * speed);
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

@@ -6,7 +6,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class FruitBehaviour : MonoBehaviour {
     public bool edible;
     GameObject snout;
-    string[] fruits = new string[] { "Orange", "Melon", "Banana", "Pineapple"};
     // Use this for initialization
     void Start () {
         edible = false;
@@ -22,13 +21,13 @@ public class FruitBehaviour : MonoBehaviour {
         if (collision.collider.tag == "Wolf" && edible == true)
         {
             BeingConsumed();
-            AssignPoints(0);
+            AssignPoints(0,true);
         }
-        else if (collision.collider.tag == "Snout" && snout.GetComponent<Animation>().isPlaying)
+        else if (collision.collider.tag == "Snout" && snout.GetComponent<PlayEating>().eating==true)
         {
-            GameObject.FindGameObjectWithTag("Snout").GetComponent<PlayEating>().startEating();
+            GameObject.FindGameObjectWithTag("Snout").GetComponent<PlayEating>().StartEating();
             BeingConsumed();
-            AssignPoints(1);
+            AssignPoints(1,false);
         }
     }
 
@@ -91,31 +90,32 @@ public class FruitBehaviour : MonoBehaviour {
         }
         Destroy(gameObject);
     }
-    void AssignPoints(int owner)
+    void AssignPoints(int owner, bool wSizeCheck)
     {
         int h = owner;
-        var fruitSpawnScript = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<FruitSpawning>();
+        var pointSystem = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<PointSystem>();
         string value = gameObject.tag;
-        int debugValue = fruitSpawnScript.totalPoints[0];
+        int debugValue = pointSystem.totalPoints[0];
         switch (value)
         {
             case "Orange":
-                fruitSpawnScript.totalPoints[h] += Random.Range(1, 5);
+                pointSystem.totalPoints[h] += Random.Range(1, 5);
                 break;
             case "Banana":
-                fruitSpawnScript.totalPoints[h] += Random.Range(3, 8);
+                pointSystem.totalPoints[h] += Random.Range(3, 8);
                 break;
             case "Pineapple":
-                fruitSpawnScript.totalPoints[h] += Random.Range(5, 10);
+                pointSystem.totalPoints[h] += Random.Range(5, 10);
                 break;
             case "Melon":
-                fruitSpawnScript.totalPoints[h] += Random.Range(7, 11);
+                pointSystem.totalPoints[h] += Random.Range(7, 11);
                 break;
         }
-        Debug.Log("wolf just ate a(n) " + value + " worth " + (fruitSpawnScript.totalPoints[0]-debugValue) + " points");
-    }
-    void IncreaseSize()
-    {
-
+        if(wSizeCheck)
+        {
+            Debug.Log("inside wSizeCheck");
+            pointSystem.WolfSize();
+        }
+        Debug.Log("wolf just ate a(n) " + value + " worth " + (pointSystem.totalPoints[0]-debugValue) + " points. Totalt points = "+ pointSystem.totalPoints[0]);
     }
 }

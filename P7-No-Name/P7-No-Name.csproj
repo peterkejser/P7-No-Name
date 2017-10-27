@@ -87,7 +87,10 @@
     <Compile Include="Assets\Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\FruitBehaviour.cs" />
     <Compile Include="Assets\Scripts\FruitSpawning.cs" />
+    <Compile Include="Assets\Scripts\Hole.cs" />
     <Compile Include="Assets\Scripts\PlayEating.cs" />
+    <Compile Include="Assets\Scripts\PointSystem.cs" />
+    <Compile Include="Assets\Scripts\StartGameKBM.cs" />
     <Compile Include="Assets\Scripts\WolfBehaviour.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />

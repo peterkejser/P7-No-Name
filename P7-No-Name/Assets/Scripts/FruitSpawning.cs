@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class FruitSpawning : MonoBehaviour {
     string[] fruits = new string[] { "Orange", "Melon", "Banana", "Pineapple" };
-    Vector3[] spawnRegion = new Vector3[5];
     Vector3[] regionFrom = new Vector3[] { new Vector3(-20f, 0.5f, -20f), new Vector3(-20f, 0.5f, 0f), new Vector3(0f, 0.5f, 0f), new Vector3(0f, 0.5f, -20f), new Vector3(-20f, 0.5f, -20f) };
     Vector3[] regionTo = new Vector3[] { new Vector3(0f, 0.5f, 0f), new Vector3(0f, 0.5f, 20f), new Vector3(20f, 0.5f, 20f), new Vector3(20f, 0.5f, 0f), new Vector3(20f, 0.5f, 20f) };
     public GameObject wolfObject;
-    public int[] totalPoints = new int[2];
     // Use this for initialization
     void Start()
     {

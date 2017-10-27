@@ -11,6 +11,7 @@ TagManager:
   - Wolf
   - ScriptHolder
   - Snout
+  - Text
   layers:
   - Default
   - TransparentFX
