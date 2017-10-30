@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class StartGameKBM : MonoBehaviour {
     Animation tranAni;
+    GameObject jackal;
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -12,12 +14,14 @@ public class StartGameKBM : MonoBehaviour {
     void Start()
     {
         tranAni = GameObject.FindGameObjectWithTag("Text").GetComponent<Animation>();
+        jackal = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag=="Snout")
         {
+            jackal.GetComponent<FirstPersonController>().m_WalkSpeed = 0;
             Debug.Log("check");
             tranAni.Play();
             StartCoroutine("LoadYourAsyncScene",tranAni);
@@ -36,5 +40,6 @@ public class StartGameKBM : MonoBehaviour {
         {
             yield return null;
         }
+        DestroyObject(gameObject);
     }
 }

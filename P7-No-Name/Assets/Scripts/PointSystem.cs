@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.UI;
 
 public class PointSystem : MonoBehaviour {
     public int[] totalPoints = new int[2];
@@ -10,19 +11,24 @@ public class PointSystem : MonoBehaviour {
     bool tooBig;
     GameObject wolf;
     GameObject hlDescription;
+    Text textOverlay;
 
     // Use this for initialization
     void Start () {
+        totalPoints[1] = 0;
+        totalPoints[0] = 0;
         tooBig = false;
         wolf = GameObject.FindGameObjectWithTag("Wolf");
         hlDescription = GameObject.FindGameObjectWithTag("Text");
-	}
+        textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if (totalPoints[1]>100)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().m_WalkSpeed = 2;
+            textOverlay.text = "you couldn't escape because you got too big to fit through the hole and you go shot by the farmer or something XD";
         }
 	}
 
@@ -38,7 +44,7 @@ public class PointSystem : MonoBehaviour {
         else if (value > 79 && value < 101)
         { hungerDescription = "feeling good"; }
         else if (value > 100)
-        { hungerDescription = "too full!"; tooBig = true; }
+        { }
         StartCoroutine("TempDispText", hungerDescription);
     }
 

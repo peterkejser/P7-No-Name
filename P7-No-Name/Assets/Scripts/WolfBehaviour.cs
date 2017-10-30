@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WolfBehaviour : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class WolfBehaviour : MonoBehaviour {
     public bool fruitsAreSpawning;
     public int speed;
     GameObject scriptHolder;
+    Text textOverlay;
 
     void Start()
     {
@@ -89,5 +91,7 @@ public class WolfBehaviour : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
+        textOverlay.text = "you couldn't espace because the wolf blocked your path and you go shot by the farmer or something XD";
     }
 }
