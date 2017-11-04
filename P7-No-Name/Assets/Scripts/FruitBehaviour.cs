@@ -42,7 +42,7 @@ public class FruitBehaviour : MonoBehaviour {
 
         if (transform.position.x < 0 && transform.position.z < 0)
         {
-            hitColliders = Physics.OverlapBox(new Vector3(-12.5f, 0, -12.5f), boxSize, Quaternion.identity, fruitOnly);
+            hitColliders = Physics.OverlapBox(new Vector3(-12.5f, 1, -12.5f), boxSize, Quaternion.identity, fruitOnly);
             if (hitColliders.Length < 4)
             {
                 fruitSpawnScript.SpawnSingleFruit(0);
@@ -54,7 +54,7 @@ public class FruitBehaviour : MonoBehaviour {
         }
         else if (transform.position.x < 0 && transform.position.z > 0)
         {
-            hitColliders = Physics.OverlapBox(new Vector3(-12.5f, 0, 12.5f), boxSize, Quaternion.identity, fruitOnly);
+            hitColliders = Physics.OverlapBox(new Vector3(-12.5f, 1, 12.5f), boxSize, Quaternion.identity, fruitOnly);
             if (hitColliders.Length < 4)
             {
                 fruitSpawnScript.SpawnSingleFruit(1);
@@ -66,7 +66,7 @@ public class FruitBehaviour : MonoBehaviour {
         }
         else if (transform.position.x > 0 && transform.position.z > 0)
         {
-            hitColliders = Physics.OverlapBox(new Vector3(12.5f, 0, 12.5f), boxSize, Quaternion.identity, fruitOnly);
+            hitColliders = Physics.OverlapBox(new Vector3(12.5f, 1, 12.5f), boxSize, Quaternion.identity, fruitOnly);
             if (hitColliders.Length < 4)
             {
                 fruitSpawnScript.SpawnSingleFruit(2);
@@ -78,7 +78,7 @@ public class FruitBehaviour : MonoBehaviour {
         }
         else if (transform.position.x > 0 && transform.position.z < 0)
         {
-            hitColliders = Physics.OverlapBox(new Vector3(12.5f, 0, -12.5f), boxSize, Quaternion.identity, fruitOnly);
+            hitColliders = Physics.OverlapBox(new Vector3(12.5f, 1, -12.5f), boxSize, Quaternion.identity, fruitOnly);
             if (hitColliders.Length < 4)
             {
                 fruitSpawnScript.SpawnSingleFruit(3);

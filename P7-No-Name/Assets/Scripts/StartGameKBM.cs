@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.UI;
 
 public class StartGameKBM : MonoBehaviour {
     Animation tranAni;
     GameObject jackal;
+    int userScore;
+    GameObject scriptHolder;
+    Text textOverlay;
+
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -15,9 +20,10 @@ public class StartGameKBM : MonoBehaviour {
     {
         tranAni = GameObject.FindGameObjectWithTag("Text").GetComponent<Animation>();
         jackal = GameObject.FindGameObjectWithTag("Player");
+        scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.tag=="Snout")
         {

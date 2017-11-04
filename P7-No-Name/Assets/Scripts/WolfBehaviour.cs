@@ -56,7 +56,7 @@ public class WolfBehaviour : MonoBehaviour {
     {
         target.GetComponent<FruitBehaviour>().edible = true;
         var currentPos = transform.position;
-        var targetPos = new Vector3(target.position.x, 3, target.position.z);
+        var targetPos = new Vector3(target.position.x, 4, target.position.z);
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
         while (transform.position != targetPos && target != null)
@@ -81,7 +81,7 @@ public class WolfBehaviour : MonoBehaviour {
     IEnumerator MoveToHole()
     {
         var currentPos = transform.position;
-        Vector3 targetPos = new Vector3(-3.66f, 1.02f, -24.5f);
+        Vector3 targetPos = new Vector3(-3.66f, 2.02f, -24.5f);
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
         while (transform.position != targetPos)

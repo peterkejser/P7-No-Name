@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FruitSpawning : MonoBehaviour {
     string[] fruits = new string[] { "Orange", "Melon", "Banana", "Pineapple" };
-    Vector3[] regionFrom = new Vector3[] { new Vector3(-20f, 0.5f, -20f), new Vector3(-20f, 0.5f, 0f), new Vector3(0f, 0.5f, 0f), new Vector3(0f, 0.5f, -20f), new Vector3(-20f, 0.5f, -20f) };
-    Vector3[] regionTo = new Vector3[] { new Vector3(0f, 0.5f, 0f), new Vector3(0f, 0.5f, 20f), new Vector3(20f, 0.5f, 20f), new Vector3(20f, 0.5f, 0f), new Vector3(20f, 0.5f, 20f) };
+    Vector3[] regionFrom = new Vector3[] { new Vector3(-20f, 1.5f, -20f), new Vector3(-20f, 1.5f, 0f), new Vector3(0f, 1.5f, 0f), new Vector3(0f, 1.5f, -20f), new Vector3(-20f, 1.5f, -20f) };
+    Vector3[] regionTo = new Vector3[] { new Vector3(0f, 1.5f, 0f), new Vector3(0f, 1.5f, 20f), new Vector3(20f, 1.5f, 20f), new Vector3(20f, 1.5f, 0f), new Vector3(20f, 1.5f, 20f) };
     public GameObject wolfObject;
     // Use this for initialization
     void Start()
@@ -26,14 +26,14 @@ public class FruitSpawning : MonoBehaviour {
             {
                 string tempFruit = fruits[Random.Range(0, 4)];
                 GameObject fruitInstance = Instantiate(Resources.Load(tempFruit, typeof(GameObject))) as GameObject;
-                fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[i].x, regionTo[i].x), 0.5f, Random.Range(regionFrom[i].z, regionTo[i].z));
+                fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[i].x, regionTo[i].x), 1.5f, Random.Range(regionFrom[i].z, regionTo[i].z));
             }
         }
         for (int h = 0; h < 13; h++)
         {
             string tempFruit = fruits[Random.Range(0, 4)];
             GameObject fruitInstance = Instantiate(Resources.Load(tempFruit, typeof(GameObject))) as GameObject;
-            fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[4].x, regionTo[4].x), 0.5f, Random.Range(regionFrom[4].z, regionTo[4].z));
+            fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[4].x, regionTo[4].x), 1.5f, Random.Range(regionFrom[4].z, regionTo[4].z));
         }
         wolfObject.GetComponent<WolfBehaviour>().fruitsAreSpawning = false;
     }
@@ -42,6 +42,6 @@ public class FruitSpawning : MonoBehaviour {
     {
         string tempFruit = fruits[Random.Range(0, 4)];
         GameObject fruitInstance = Instantiate(Resources.Load(tempFruit, typeof(GameObject))) as GameObject;
-        fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[regionNumber].x, regionTo[regionNumber].x), 0.5f, Random.Range(regionFrom[regionNumber].z, regionTo[regionNumber].z));
+        fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[regionNumber].x, regionTo[regionNumber].x), 1.5f, Random.Range(regionFrom[regionNumber].z, regionTo[regionNumber].z));
     }
 }

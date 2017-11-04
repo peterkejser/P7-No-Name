@@ -13,6 +13,7 @@ TagManager:
   - Snout
   - Text
   - TextOverlay
+  - EarthParticles
   layers:
   - Default
   - TransparentFX
