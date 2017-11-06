@@ -93,6 +93,15 @@
     <Compile Include="Assets\Scripts\PlayEating.cs" />
     <Compile Include="Assets\Scripts\PointSystem.cs" />
     <Compile Include="Assets\Scripts\StartGameKBM.cs" />
+    <Compile Include="Assets\Scripts\StartGameVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\DiggingVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\ExitVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\FruitBehavVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\FruitSpawnVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\HoleCheckVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\PointSystemVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\VREating.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\WolfVR.cs" />
     <Compile Include="Assets\Scripts\WolfBehaviour.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />

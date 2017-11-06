@@ -37,7 +37,7 @@ public class PlayEating : MonoBehaviour {
     IEnumerator TryingToEat()
     {
         eating = true;
-        snoutCollider.height = 0.12f;
+        snoutCollider.height = 0.14f;
         yield return new WaitForSeconds(0.2f);
         snoutCollider.height = 0f;
         eating = false;

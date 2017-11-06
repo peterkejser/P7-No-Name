@@ -79,6 +79,7 @@
         private void DoTriggerPressed(object sender, ControllerInteractionEventArgs e)
         {
             DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "pressed", e);
+            GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().VRdigging();
         }
 
         private void DoTriggerReleased(object sender, ControllerInteractionEventArgs e)
