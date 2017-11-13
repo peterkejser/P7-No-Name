@@ -11,7 +11,7 @@ public class PointSystemVR : MonoBehaviour {
     bool tooBig;
     GameObject wolf;
     GameObject hlDescription;
-    Text textOverlay;
+    GameObject scriptHolder;
 
     // Use this for initialization
     void Start()
@@ -19,9 +19,9 @@ public class PointSystemVR : MonoBehaviour {
         totalPoints[1] = 0;
         totalPoints[0] = 0;
         tooBig = false;
+        scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
         wolf = GameObject.FindGameObjectWithTag("Wolf");
         hlDescription = GameObject.FindGameObjectWithTag("Text");
-        textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -29,7 +29,11 @@ public class PointSystemVR : MonoBehaviour {
     {
         if (totalPoints[1] > 100)
         {
-            textOverlay.text = "you couldn't escape because you got too big to fit through the hole and you go shot by the farmer or something XD";
+            scriptHolder.GetComponent<Master>().PlayAudioClip(4);
+            if(!scriptHolder.GetComponent<AudioSource>().isPlaying)
+            {
+                SteamVR_LoadLevel.Begin("StartSceneVR");
+            }
         }
     }
 

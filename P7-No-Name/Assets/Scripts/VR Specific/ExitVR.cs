@@ -10,10 +10,12 @@ public class ExitVR : MonoBehaviour {
     GameObject jackal;
     Text textOverlay;
     string textDes;
+    bool exiting;
 
     // Use this for initialization
     void Start()
     {
+        exiting = true;
         scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
         jackal = GameObject.FindGameObjectWithTag("Player");
         textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
@@ -22,29 +24,29 @@ public class ExitVR : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         userScore = scriptHolder.GetComponent<PointSystemVR>().totalPoints[1];
-        if (userScore >= 80)
+        if (exiting == false)
         {
-            textDes = "You Won!";
+            exiting = true;
         }
-        if (userScore < 40)
+        if (userScore >= 80 && exiting == true)
         {
-            textDes = "starving!";
+            scriptHolder.GetComponent<Master>().PlayAudioClip(2);
+            exiting = false;
         }
-        if (userScore > 39 && userScore < 60)
+        if (userScore < 40 && exiting == true)
         {
-            textDes = "still hungry!";
+            scriptHolder.GetComponent<Master>().PlayAudioClip(3);
+            exiting = false;
         }
-        if (userScore > 59 && userScore < 80)
+        if (userScore > 39 && userScore < 60 && exiting == true)
         {
-            textDes = "still a little hungry!";
+            scriptHolder.GetComponent<Master>().PlayAudioClip(3);
+            exiting = false;
         }
-        StartCoroutine("TempDispTextDes", textDes);
-    }
-
-    IEnumerator TempDispTextDes(string hungerDescription)
-    {
-        textOverlay.text = "You are " + hungerDescription;
-        yield return new WaitForSeconds(2f);
-        textOverlay.text = "";
+        if (userScore > 59 && userScore < 80 && exiting == true)
+        {
+            scriptHolder.GetComponent<Master>().PlayAudioClip(3);
+            exiting = false;
+        }
     }
 }

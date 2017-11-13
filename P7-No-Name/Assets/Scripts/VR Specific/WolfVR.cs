@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WolfVR : MonoBehaviour {
 
-    public Animation eatingAnimation;
     public bool fruitsAreSpawning;
     public int speed;
     GameObject scriptHolder;
@@ -55,19 +54,36 @@ public class WolfVR : MonoBehaviour {
     IEnumerator MoveToFruit(Transform target)
     {
         target.GetComponent<FruitBehavVR>().edible = true;
-        var currentPos = transform.position;
-        var targetPos = new Vector3(target.position.x, 4, target.position.z);
+        Vector3 targetPos = new Vector3(target.position.x, 1, target.position.z);
+        Vector3 currentPos = transform.position;
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
+        gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+
         while (transform.position != targetPos && target != null)
         {
             float fracJourney = elapsedTime / journeyLength;
+            //rotation
+            var lookPos = target.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.02f);
+            //position
             transform.position = Vector3.Lerp(currentPos, targetPos, fracJourney * speed);
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        eatingAnimation.Play("New Animation");
-        yield return new WaitForSeconds(2f);
+        if (target.tag == "Melon" || target.tag == "Pineapple")
+        {
+            gameObject.GetComponent<Animator>().SetTrigger("isMunching");
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().SetTrigger("isLowMunching");
+        }
+        yield return new WaitForSeconds(1f);
+        target.GetComponent<FruitBehavVR>().WolfEating();
+        yield return new WaitForSeconds(1.1f);
 
         if (scriptHolder.GetComponent<PointSystemVR>().totalPoints[0] < 100)
         {
@@ -91,7 +107,7 @@ public class WolfVR : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
-        textOverlay.text = "you couldn't espace because the wolf blocked your path and you go shot by the farmer or something XD";
+        Debug.Log("check!");
+        scriptHolder.GetComponent<Master>().PlayAudioClip(1);
     }
 }

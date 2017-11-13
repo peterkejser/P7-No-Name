@@ -16,14 +16,20 @@ public class FruitBehaviour : MonoBehaviour {
 	void Update () {
 		
 	}
-    void OnCollisionEnter(Collision collision)
+    public void WolfEating()
     {
-        if (collision.collider.tag == "Wolf" && edible == true)
+        BeingConsumed();
+        AssignPoints(0, true);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        /*
+        if (other.tag == "Wolf" && edible == true)
         {
             BeingConsumed();
             AssignPoints(0,true);
-        }
-        else if (collision.collider.tag == "Snout" && snout.GetComponent<PlayEating>().eating==true)
+        }*/
+        if (other.tag == "Snout" && snout.GetComponent<PlayEating>().eating==true)
         {
             GameObject.FindGameObjectWithTag("Snout").GetComponent<PlayEating>().StartEating();
             BeingConsumed();

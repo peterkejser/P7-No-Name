@@ -19,8 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4745290228390112}
-  - component: {fileID: 135592412330669374}
   - component: {fileID: 114666711509131946}
+  - component: {fileID: 135078240875731486}
+  - component: {fileID: 65816762777126270}
   - component: {fileID: 54551997713280408}
   m_Layer: 8
   m_Name: OrangeVR
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1693135731659264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 1.5, z: -18.7}
+  m_LocalPosition: {x: -2.113, y: 1.196, z: -19.326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4254672355206538}
@@ -125,8 +126,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65816762777126270
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693135731659264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.75, z: 0.5}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &114666711509131946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edible: 0
---- !u!135 &135592412330669374
+--- !u!135 &135078240875731486
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4745290228390112}
   - component: {fileID: 114981838198279396}
-  - component: {fileID: 135592412330669374}
-  - component: {fileID: 54572126311806682}
+  - component: {fileID: 135706548386659966}
+  - component: {fileID: 65169611076080060}
+  - component: {fileID: 54091693124365262}
   m_Layer: 8
   m_Name: Orange
   m_TagString: Orange
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911614990840800}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: -0.14}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 4745290228390112}
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1693135731659264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 1.5, z: -18.7}
+  m_LocalPosition: {x: 1.27, y: 1.17, z: -18.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4254672355206538}
@@ -112,7 +113,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911614990840800}
   m_Mesh: {fileID: 4300000, guid: 607561cb12ee8b44cb8c17126d6ec42d, type: 3}
---- !u!54 &54572126311806682
+--- !u!54 &54091693124365262
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -125,8 +126,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65169611076080060
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693135731659264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.35, z: -0.12}
 --- !u!114 &114981838198279396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edible: 0
---- !u!135 &135592412330669374
+--- !u!135 &135706548386659966
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -150,4 +163,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.15}

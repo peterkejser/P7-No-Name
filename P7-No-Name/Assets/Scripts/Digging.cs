@@ -33,7 +33,15 @@ public class Digging : MonoBehaviour {
         Debug.Log(i);
         if (Input.GetKeyDown("r"))
         {
-            i = 0;
+            Debug.Log("check3");
+            for (int i = 0; i < xRes; i++)
+            {
+                for (int j = 0; j < yRes; j++)
+                {
+                    heights[i, j] = reset;
+                }
+            }
+
             //right beneath the wire
             heights[221, 240] = reset;
             heights[221, 241] = reset;

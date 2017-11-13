@@ -10,6 +10,7 @@ public class FruitBehavVR : MonoBehaviour {
     {
         edible = false;
         snout = GameObject.FindGameObjectWithTag("Snout");
+        Debug.Log("check1");
     }
 
     // Update is called once per frame
@@ -17,15 +18,16 @@ public class FruitBehavVR : MonoBehaviour {
     {
 
     }
-    void OnCollisionEnter(Collision collision)
+    public void WolfEating()
     {
-        if (collision.collider.tag == "Wolf" && edible == true)
+        BeingConsumed();
+        AssignPoints(0, true);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Snout")
         {
-            BeingConsumed();
-            AssignPoints(0, true);
-        }
-        else if (collision.collider.tag == "Snout")
-        {
+            
             GameObject.FindGameObjectWithTag("Snout").GetComponent<VREating>().StartEating();
             BeingConsumed();
             AssignPoints(1, false);

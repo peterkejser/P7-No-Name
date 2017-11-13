@@ -93,13 +93,16 @@
     <Compile Include="Assets\Scripts\PlayEating.cs" />
     <Compile Include="Assets\Scripts\PointSystem.cs" />
     <Compile Include="Assets\Scripts\StartGameKBM.cs" />
-    <Compile Include="Assets\Scripts\StartGameVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\DiggingVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\ExitVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\FruitBehavVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\FruitSpawnVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\HoleCheckVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\LeftPawSpecifics.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\Master.cs" />
     <Compile Include="Assets\Scripts\VR Specific\PointSystemVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\RightPawSpecifics.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\StartGameVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\VREating.cs" />
     <Compile Include="Assets\Scripts\VR Specific\WolfVR.cs" />
     <Compile Include="Assets\Scripts\WolfBehaviour.cs" />
@@ -461,6 +464,7 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Scripts\Test.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

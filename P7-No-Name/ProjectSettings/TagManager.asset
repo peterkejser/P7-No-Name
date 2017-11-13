@@ -16,6 +16,8 @@ TagManager:
   - EarthParticles
   - ExcludeTeleport
   - DiggingRange
+  - ControllerLeft
+  - ControllerRight
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - 
   - 
   - Fruits
-  - 
+  - VRObjects
   - 
   - 
   - 

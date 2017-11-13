@@ -1,13 +1,16 @@
 ﻿namespace VRTK.Examples
 {
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
     public class VRTK_ControllerEvents_ListenerExample : MonoBehaviour
     {
+        int sceneNumber;
         private void Start()
         {
             if (GetComponent<VRTK_ControllerEvents>() == null)
             {
+                sceneNumber = SceneManager.GetActiveScene().buildIndex;
                 VRTK_Logger.Error(VRTK_Logger.GetCommonMessage(VRTK_Logger.CommonMessageKeys.REQUIRED_COMPONENT_MISSING_FROM_GAMEOBJECT, "VRTK_ControllerEvents_ListenerExample", "VRTK_ControllerEvents", "the same"));
                 return;
             }
@@ -79,12 +82,22 @@
         private void DoTriggerPressed(object sender, ControllerInteractionEventArgs e)
         {
             DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "pressed", e);
-            GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().VRdigging();
+            //GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().VRdigging();
+            if (sceneNumber == 0)
+            {
+                GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().tryingToDig = true;
+            }
+
         }
 
         private void DoTriggerReleased(object sender, ControllerInteractionEventArgs e)
         {
             DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "released", e);
+            if (sceneNumber == 0)
+            {
+                GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().tryingToDig = false;
+            }
+
         }
 
         private void DoTriggerTouchStart(object sender, ControllerInteractionEventArgs e)

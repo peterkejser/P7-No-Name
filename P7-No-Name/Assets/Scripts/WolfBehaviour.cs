@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WolfBehaviour : MonoBehaviour {
 
-    public Animation eatingAnimation;
     public bool fruitsAreSpawning;
     public int speed;
     GameObject scriptHolder;
@@ -13,7 +12,7 @@ public class WolfBehaviour : MonoBehaviour {
 
     void Start()
     {
-        speed = 5;
+        speed = 2;
         scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
     }
 
@@ -55,19 +54,36 @@ public class WolfBehaviour : MonoBehaviour {
     IEnumerator MoveToFruit(Transform target)
     {
         target.GetComponent<FruitBehaviour>().edible = true;
-        var currentPos = transform.position;
-        var targetPos = new Vector3(target.position.x, 4, target.position.z);
+        Vector3 targetPos = new Vector3(target.position.x, 1, target.position.z);
+        Vector3 currentPos = transform.position;
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
+        gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+
         while (transform.position != targetPos && target != null)
         {
             float fracJourney = elapsedTime / journeyLength;
+            //rotation
+            var lookPos = target.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.02f);
+            //position
             transform.position = Vector3.Lerp(currentPos, targetPos, fracJourney * speed);
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        eatingAnimation.Play("New Animation");
-        yield return new WaitForSeconds(2f);
+        if (target.tag == "Melon" || target.tag == "Pineapple")
+        {
+            gameObject.GetComponent<Animator>().SetTrigger("isMunching");
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().SetTrigger("isLowMunching");
+        }
+        yield return new WaitForSeconds(1f);
+        target.GetComponent<FruitBehaviour>().WolfEating();
+        yield return new WaitForSeconds(1.1f);
 
         if (scriptHolder.GetComponent<PointSystem>().totalPoints[0] < 100)
         {

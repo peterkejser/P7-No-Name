@@ -15,9 +15,21 @@ public class DiggingVR : MonoBehaviour {
     int i;
     GameObject earthParticles;
     bool inDigRange = false;
+    public bool tryingToDig = false;
+    public GameObject pawRight;
+    public GameObject pawLeft;
+    float timer;
+    float rpFirstPos;
+    float lpFirstPos;
+    float rpSecondPos;
+    float lpSecondPos;
+    float rpPosDif;
+    float lpPosDif;
+    bool initialPosCheck;
 
     void Start()
     {
+        timer = 0;
         earthParticles = GameObject.FindGameObjectWithTag("EarthParticles");
         i = 0;
         sceneNumber = SceneManager.GetActiveScene().buildIndex;
@@ -26,14 +38,51 @@ public class DiggingVR : MonoBehaviour {
         xRes = TerrainMain.terrainData.heightmapWidth;
         yRes = TerrainMain.terrainData.heightmapHeight;
         heights = TerrainMain.terrainData.GetHeights(0, 0, xRes, yRes);
+        //right beneath the wire
+        heights[221, 240] = reset;
+        heights[221, 241] = reset;
+        heights[221, 239] = reset;
+        //one point backwards
+        heights[220, 240] = reset;
+        heights[220, 239] = reset;
+        heights[220, 241] = reset;
+        // one point forwards
+        heights[222, 240] = reset;
+        heights[222, 241] = reset;
+        heights[222, 239] = reset;
+        TerrainMain.terrainData.SetHeights(0, 0, heights);
     }
 
     void Update()
     {
-        Debug.Log(i);
+        if (tryingToDig)
+        {
+            Debug.Log("check1");
+            if (initialPosCheck)
+            {
+                rpFirstPos = pawRight.transform.position.z;
+                lpFirstPos = pawLeft.transform.position.z;
+                initialPosCheck = false;
+            }
+            if (timer <0.5f)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                rpSecondPos = pawRight.transform.position.z;
+                lpSecondPos = pawLeft.transform.position.z;
+                rpPosDif = Mathf.Abs(rpFirstPos - rpSecondPos);
+                lpPosDif = Mathf.Abs(lpFirstPos - lpSecondPos);
+                Debug.Log(rpFirstPos + " " + rpSecondPos + " " + rpPosDif);
+                //Debug.Log("The difference in position of the right paw = "+rpPosDif+ " & The difference in position of the right paw = "+lpPosDif);
+                Tempstuff(rpPosDif,lpPosDif);
+            }
+
+        }
         if (Input.GetKeyDown("r"))
         {
-            i = 0;
+
             //right beneath the wire
             heights[221, 240] = reset;
             heights[221, 241] = reset;
@@ -48,6 +97,17 @@ public class DiggingVR : MonoBehaviour {
             heights[222, 239] = reset;
             TerrainMain.terrainData.SetHeights(0, 0, heights);
         }
+    }
+    void Tempstuff(float rpPosDif, float lpPosDif)
+    {
+        if(rpPosDif>0.1 || lpPosDif>0.1)
+        {
+            VRdigging();
+        }
+        timer = 0;
+        rpSecondPos = 0;
+        lpSecondPos = 0;
+        initialPosCheck = true;
     }
     private void OnTriggerStay(Collider other)
     {
@@ -75,15 +135,14 @@ public class DiggingVR : MonoBehaviour {
     void LowerTerrain()
     {
         //right beneath the wire
-        Debug.Log("new");
         heights[221, 240] = lowerTerAmount[i];
         heights[221, 241] = lowerTerAmount[i];
         heights[221, 239] = lowerTerAmount[i];
-        //one point backwards
+        //Behind Fence
         heights[220, 240] = lowerTerAmount[i];
         heights[220, 239] = lowerTerAmount[i];
         heights[220, 241] = lowerTerAmount[i];
-        // one point forwards
+        // Infront of fence
         heights[222, 240] = lowerTerAmount[i];
         heights[222, 241] = lowerTerAmount[i];
         heights[222, 239] = lowerTerAmount[i];
