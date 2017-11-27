@@ -120,7 +120,7 @@ public class FruitBehaviour : MonoBehaviour {
         if(wSizeCheck)
         {
             Debug.Log("inside wSizeCheck");
-            pointSystem.WolfSize();
+            pointSystem.WolfSize(debugValue);
         }
         Debug.Log("wolf just ate a(n) " + value + " worth " + (pointSystem.totalPoints[0]-debugValue) + " points. Totalt points = "+ pointSystem.totalPoints[0]);
     }

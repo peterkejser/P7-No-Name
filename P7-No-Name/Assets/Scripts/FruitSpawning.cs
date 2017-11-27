@@ -35,7 +35,7 @@ public class FruitSpawning : MonoBehaviour {
             GameObject fruitInstance = Instantiate(Resources.Load(tempFruit, typeof(GameObject))) as GameObject;
             fruitInstance.transform.position = new Vector3(Random.Range(regionFrom[4].x, regionTo[4].x), 1.5f, Random.Range(regionFrom[4].z, regionTo[4].z));
         }
-        wolfObject.GetComponent<WolfBehaviour>().fruitsAreSpawning = false;
+        wolfObject.GetComponent<WolfVR>().fruitsAreSpawning = false;
     }
 
     public void SpawnSingleFruit(int regionNumber)

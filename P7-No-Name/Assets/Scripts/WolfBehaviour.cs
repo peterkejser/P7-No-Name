@@ -9,11 +9,18 @@ public class WolfBehaviour : MonoBehaviour {
     public int speed;
     GameObject scriptHolder;
     Text textOverlay;
+    Animator wolfAnimator;
 
     void Start()
     {
         speed = 2;
         scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
+        findWolfAnimator();
+    }
+
+    public void findWolfAnimator()
+    {
+        wolfAnimator = gameObject.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -58,7 +65,8 @@ public class WolfBehaviour : MonoBehaviour {
         Vector3 currentPos = transform.position;
         float elapsedTime = 0;
         float journeyLength = Vector3.Distance(currentPos, targetPos);
-        gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+        findWolfAnimator();
+        wolfAnimator.SetBool("isWalking", true);
 
         while (transform.position != targetPos && target != null)
         {
@@ -75,11 +83,11 @@ public class WolfBehaviour : MonoBehaviour {
         }
         if (target.tag == "Melon" || target.tag == "Pineapple")
         {
-            gameObject.GetComponent<Animator>().SetTrigger("isMunching");
+            wolfAnimator.SetTrigger("isMunching");
         }
         else
         {
-            gameObject.GetComponent<Animator>().SetTrigger("isLowMunching");
+            wolfAnimator.SetTrigger("isLowMunching");
         }
         yield return new WaitForSeconds(1f);
         target.GetComponent<FruitBehaviour>().WolfEating();

@@ -18,6 +18,7 @@ TagManager:
   - DiggingRange
   - ControllerLeft
   - ControllerRight
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -29,8 +30,8 @@ TagManager:
   - 
   - Fruits
   - VRObjects
-  - 
-  - 
+  - Sign
+  - TerrainStuff
   - 
   - 
   - 

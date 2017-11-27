@@ -29,6 +29,7 @@ public class DiggingVR : MonoBehaviour {
 
     void Start()
     {
+        Debug.Log("checkche");
         timer = 0;
         earthParticles = GameObject.FindGameObjectWithTag("EarthParticles");
         i = 0;
@@ -57,7 +58,6 @@ public class DiggingVR : MonoBehaviour {
     {
         if (tryingToDig)
         {
-            Debug.Log("check1");
             if (initialPosCheck)
             {
                 rpFirstPos = pawRight.transform.position.z;
@@ -74,8 +74,6 @@ public class DiggingVR : MonoBehaviour {
                 lpSecondPos = pawLeft.transform.position.z;
                 rpPosDif = Mathf.Abs(rpFirstPos - rpSecondPos);
                 lpPosDif = Mathf.Abs(lpFirstPos - lpSecondPos);
-                Debug.Log(rpFirstPos + " " + rpSecondPos + " " + rpPosDif);
-                //Debug.Log("The difference in position of the right paw = "+rpPosDif+ " & The difference in position of the right paw = "+lpPosDif);
                 Tempstuff(rpPosDif,lpPosDif);
             }
 
@@ -134,19 +132,22 @@ public class DiggingVR : MonoBehaviour {
 
     void LowerTerrain()
     {
-        //right beneath the wire
-        heights[221, 240] = lowerTerAmount[i];
-        heights[221, 241] = lowerTerAmount[i];
-        heights[221, 239] = lowerTerAmount[i];
-        //Behind Fence
-        heights[220, 240] = lowerTerAmount[i];
-        heights[220, 239] = lowerTerAmount[i];
-        heights[220, 241] = lowerTerAmount[i];
-        // Infront of fence
-        heights[222, 240] = lowerTerAmount[i];
-        heights[222, 241] = lowerTerAmount[i];
-        heights[222, 239] = lowerTerAmount[i];
-        TerrainMain.terrainData.SetHeights(0, 0, heights);
-        i += 1;
+        if (i < 5)
+        {
+         //right beneath the wire
+            heights[221, 240] = lowerTerAmount[i];
+            //heights[221, 241] = lowerTerAmount[i];
+            //heights[221, 239] = lowerTerAmount[i];
+         //Behind Fence
+            heights[220, 240] = lowerTerAmount[i];
+            //heights[220, 239] = lowerTerAmount[i];
+            //heights[220, 241] = lowerTerAmount[i];
+         // Infront of fence
+            heights[222, 240] = lowerTerAmount[i];
+            //heights[222, 241] = lowerTerAmount[i];
+            //heights[222, 239] = lowerTerAmount[i];
+            TerrainMain.terrainData.SetHeights(0, 0, heights);
+            i += 1;
+        }
     }
 }

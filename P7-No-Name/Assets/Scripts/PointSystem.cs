@@ -12,9 +12,11 @@ public class PointSystem : MonoBehaviour {
     GameObject wolf;
     GameObject hlDescription;
     Text textOverlay;
+    int currentSize;
 
     // Use this for initialization
     void Start () {
+        currentSize = 1;
         totalPoints[1] = 0;
         totalPoints[0] = 0;
         tooBig = false;
@@ -55,18 +57,44 @@ public class PointSystem : MonoBehaviour {
         hlDescription.GetComponent<TextMesh>().text = "";
     }
 
-    public void WolfSize()
+    public void WolfSize(int previousValue)
     {
         int value = totalPoints[0]+wolfHungerCap;
         Vector3 sizeIncrease = new Vector3(0.3f, 0.3f, 0.3f);
         Debug.Log("inside WolfSize()");
-        if (value > 39 && value < 60)
-        { wolf.transform.localScale = new Vector3(2.3f, 2.3f, 2.3f); wolf.GetComponent<WolfBehaviour>().speed = 4; }
-        if (value > 59 && value < 80)
-        { wolf.transform.localScale = new Vector3(2.6f, 2.6f, 2.6f); wolf.GetComponent<WolfBehaviour>().speed = 4; }
-        if (value > 79 && value < 101)
-        { wolf.transform.localScale = new Vector3(2.9f, 2.9f, 2.9f); wolf.GetComponent<WolfBehaviour>().speed = 4; }
-        if (value > 100)
-        { wolf.transform.localScale = new Vector3(3.2f, 3.2f, 3.2f); wolf.GetComponent<WolfBehaviour>().speed = 4; }
+
+        if (previousValue<40 && value>39)
+        {
+            Debug.Log("checked2");
+          Destroy(wolf.transform.GetChild(0).gameObject);
+            GameObject wolfModel2 = Instantiate(Resources.Load("wolf_2", typeof(GameObject))) as GameObject;
+            wolfModel2.transform.SetParent(wolf.transform,false);
+            wolf.GetComponent<WolfBehaviour>().findWolfAnimator();
+            wolf.GetComponent<WolfBehaviour>().speed = 4;
+        }
+        if (previousValue<60 && value>59)
+        {
+            Destroy(wolf.transform.GetChild(0).gameObject);
+            GameObject wolfModel3 = Instantiate(Resources.Load("wolf_3", typeof(GameObject))) as GameObject;
+            wolfModel3.transform.SetParent(wolf.transform,false);
+            wolf.GetComponent<WolfBehaviour>().findWolfAnimator();
+            wolf.GetComponent<WolfBehaviour>().speed = 4;
+        }
+        if (previousValue<80 && value>79)
+        {
+            Destroy(wolf.transform.GetChild(0).gameObject);
+            GameObject wolfModel4 = Instantiate(Resources.Load("wolf_4", typeof(GameObject))) as GameObject;
+            wolfModel4.transform.SetParent(wolf.transform,false);
+            wolf.GetComponent<WolfBehaviour>().findWolfAnimator();
+            wolf.GetComponent<WolfBehaviour>().speed = 4;
+        }
+        if (previousValue<100 && value>99)
+        {
+            Destroy(wolf.transform.GetChild(0).gameObject);
+            GameObject wolfModel5 = Instantiate(Resources.Load("wolf_5", typeof(GameObject))) as GameObject;
+            wolfModel5.transform.SetParent(wolf.transform, false);
+            wolf.GetComponent<WolfBehaviour>().findWolfAnimator();
+            wolf.GetComponent<WolfBehaviour>().speed = 4;
+        }
     }
 }

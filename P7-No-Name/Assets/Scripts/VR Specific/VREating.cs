@@ -5,11 +5,14 @@ using VRTK;
 
 public class VREating : MonoBehaviour{
 
-    GameObject scriptHolder;
+    public GameObject scriptHolder;
+    public GameObject LTouch;
+    public GameObject RTouch;
+    public bool moveInPlace;
     // Use this for initialization
     void Start()
     {
-        scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
+        moveInPlace = true;
     }
 
     // Update is called once per frame
@@ -25,9 +28,20 @@ public class VREating : MonoBehaviour{
     IEnumerator Eating()
     {
         gameObject.GetComponent<Animation>().Play();
-        Debug.Log("check check");
-        scriptHolder.GetComponent<VRTK_MoveInPlace>().speedScale = 0;
-        yield return new WaitForSeconds(1f);
-        scriptHolder.GetComponent<VRTK_MoveInPlace>().speedScale = 1;
+        Debug.Log("check chec2");
+        if(moveInPlace == true)
+        {
+            scriptHolder.GetComponent<VRTK_MoveInPlace>().maxSpeed = 0;
+            yield return new WaitForSeconds(1f);
+            scriptHolder.GetComponent<VRTK_MoveInPlace>().maxSpeed = 4;
+        }
+        if(moveInPlace == false)
+        {
+            LTouch.SetActive(false);
+            RTouch.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            LTouch.SetActive(true);
+            RTouch.SetActive(true);
+        }
     }
 }

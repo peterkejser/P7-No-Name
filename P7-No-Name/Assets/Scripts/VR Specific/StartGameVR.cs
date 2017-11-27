@@ -7,15 +7,9 @@ using VRTK;
 
 public class StartGameVR : MonoBehaviour {
 
-    GameObject jackal;
-    int userScore;
-    GameObject scriptHolder;
-    Text textOverlay;
 
     void Start()
     {
-        jackal = GameObject.FindGameObjectWithTag("Player");
-        scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
     }
 
     private void OnTriggerExit(Collider other)

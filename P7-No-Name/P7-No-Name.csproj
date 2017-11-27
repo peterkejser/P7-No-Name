@@ -84,6 +84,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MiniProject\HideFruit.cs" />
+    <Compile Include="Assets\MiniProject\Logging.cs" />
+    <Compile Include="Assets\MiniProject\MPfruit.cs" />
+    <Compile Include="Assets\MiniProject\MPleftController.cs" />
+    <Compile Include="Assets\MiniProject\MPrightController.cs" />
+    <Compile Include="Assets\MiniProject\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\Digging.cs" />
     <Compile Include="Assets\Scripts\Exit.cs" />
@@ -103,6 +109,7 @@
     <Compile Include="Assets\Scripts\VR Specific\PointSystemVR.cs" />
     <Compile Include="Assets\Scripts\VR Specific\RightPawSpecifics.cs" />
     <Compile Include="Assets\Scripts\VR Specific\StartGameVR.cs" />
+    <Compile Include="Assets\Scripts\VR Specific\TutorialFruit.cs" />
     <Compile Include="Assets\Scripts\VR Specific\VREating.cs" />
     <Compile Include="Assets\Scripts\VR Specific\WolfVR.cs" />
     <Compile Include="Assets\Scripts\WolfBehaviour.cs" />

@@ -7,9 +7,8 @@ using UnityEngine.UI;
 public class HoleCheckVR : MonoBehaviour {
 
     int userScore;
+    public bool enterFromOutside;
     GameObject scriptHolder;
-    GameObject jackal;
-    Text textOverlay;
 
     void Update()
     {
@@ -18,14 +17,20 @@ public class HoleCheckVR : MonoBehaviour {
     void Start()
     {
         scriptHolder = GameObject.FindGameObjectWithTag("ScriptHolder");
-        jackal = GameObject.FindGameObjectWithTag("Player");
-        textOverlay = GameObject.FindGameObjectWithTag("TextOverlay").GetComponent<Text>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Snout")
+        if (other.tag == "Snout" && !enterFromOutside && GameObject.FindGameObjectWithTag("Wolf").GetComponent<WolfVR>().gameIsEnding==false)
         {
-            GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<PointSystemVR>().CheckHungerLevel();
+            if (scriptHolder.GetComponent<Master>().audioSource.isPlaying == false)
+            {
+                scriptHolder.GetComponent<PointSystemVR>().CheckHungerLevel();
+                GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitVR>().exiting = true;
+            }
+        }
+        else if (other.tag == "Snout" && enterFromOutside)
+        {
+            enterFromOutside = false;
         }
     }
 }

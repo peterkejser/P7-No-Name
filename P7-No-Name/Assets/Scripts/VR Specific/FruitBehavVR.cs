@@ -5,12 +5,12 @@ using UnityEngine;
 public class FruitBehavVR : MonoBehaviour {
     public bool edible;
     GameObject snout;
+
     // Use this for initialization
     void Start()
     {
         edible = false;
         snout = GameObject.FindGameObjectWithTag("Snout");
-        Debug.Log("check1");
     }
 
     // Update is called once per frame
@@ -18,30 +18,23 @@ public class FruitBehavVR : MonoBehaviour {
     {
 
     }
-    public void WolfEating()
-    {
-        BeingConsumed();
-        AssignPoints(0, true);
-    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Snout")
+        if (other.tag == "Snout" && edible == false)
         {
-            
+            GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<Master>().FirstTimeFruit(gameObject.tag);
             GameObject.FindGameObjectWithTag("Snout").GetComponent<VREating>().StartEating();
-            BeingConsumed();
-            AssignPoints(1, false);
+            BeingConsumed(1);
         }
     }
 
-
-    void BeingConsumed()
+    public void BeingConsumed(int owner)
     {
         Collider[] hitColliders = null;
         Vector3 boxSize = new Vector3(12.5f, 2f, 12.5f);
         LayerMask fruitOnly = 1 << LayerMask.NameToLayer("Fruits");
         var fruitSpawnScript = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<FruitSpawnVR>();
-
 
         if (transform.position.x < 0 && transform.position.z < 0)
         {
@@ -91,34 +84,10 @@ public class FruitBehavVR : MonoBehaviour {
                 fruitSpawnScript.SpawnSingleFruit(4);
             }
         }
-        Destroy(gameObject);
-    }
-    void AssignPoints(int owner, bool wSizeCheck)
-    {
-        int h = owner;
         var pointSystem = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<PointSystemVR>();
-        string value = gameObject.tag;
-        int debugValue = pointSystem.totalPoints[0];
-        switch (value)
-        {
-            case "Orange":
-                pointSystem.totalPoints[h] += Random.Range(1, 5);
-                break;
-            case "Banana":
-                pointSystem.totalPoints[h] += Random.Range(3, 8);
-                break;
-            case "Pineapple":
-                pointSystem.totalPoints[h] += Random.Range(5, 10);
-                break;
-            case "Melon":
-                pointSystem.totalPoints[h] += Random.Range(7, 11);
-                break;
-        }
-        if (wSizeCheck)
-        {
-            Debug.Log("inside wSizeCheck");
-            pointSystem.WolfSize();
-        }
-        Debug.Log("wolf just ate a(n) " + value + " worth " + (pointSystem.totalPoints[0] - debugValue) + " points. Totalt points = " + pointSystem.totalPoints[0]);
+        string fruit = gameObject.tag;
+        pointSystem.wolfPreviousScore = pointSystem.totalPoints[0];
+        pointSystem.AssignPoints(owner, fruit);
+        Destroy(gameObject);
     }
 }

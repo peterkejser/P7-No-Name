@@ -88,7 +88,7 @@ public class RightPawSpecifics : MonoBehaviour {
     {
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "pressed", e);
         //GameObject.FindGameObjectWithTag("DiggingRange").GetComponent<DiggingVR>().VRdigging();
-        if (sceneNumber == 2)
+        if (sceneNumber == 0)
         {
             digArea.GetComponent<DiggingVR>().tryingToDig = true;
         }
@@ -99,7 +99,7 @@ public class RightPawSpecifics : MonoBehaviour {
     private void DoTriggerReleased(object sender, ControllerInteractionEventArgs e)
     {
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "released", e);
-        if (sceneNumber == 2)
+        if (sceneNumber == 0)
         {
             digArea.GetComponent<DiggingVR>().tryingToDig = false;
         }
